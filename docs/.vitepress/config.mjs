@@ -35,6 +35,7 @@ export default defineConfig({
           {text: "experience",link: "/"}
         ] },
       { text: 'Tools', link: '/markdown-examples' }
+      { text: 'STAR法则', link: '/markdown-examples' }
     ],
 
     sidebar: [
