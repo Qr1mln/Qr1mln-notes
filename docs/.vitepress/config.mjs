@@ -34,7 +34,7 @@ export default defineConfig({
       { text: 'Ultra', items:[
           {text: "experience",link: "/"}
         ] },
-      { text: 'Tools', link: '/markdown-examples' }
+      { text: 'Tools', link: '/markdown-examples' },
       { text: 'STAR法则', link: '/markdown-examples' }
     ],
 
