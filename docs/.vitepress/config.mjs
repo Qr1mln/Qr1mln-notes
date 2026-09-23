@@ -2,6 +2,9 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  // GitHub Pages 项目站点地址为 https://qr1mln.github.io/Qr1mln-notes/
+  // 若改用自定义域名，需删除此项
+  base: '/Qr1mln-notes/',
   title: "钱瑞Qr1mln💕",
   description: "My Blog.",
   themeConfig: {
