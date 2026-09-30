@@ -10,46 +10,45 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '基础', items:[
-          {text:"Java", link:"/"},
-          {text:"modes", items:[
-              {text:"c", link:"/"},
-            ]},
-          {text:"Maven", items:[
-              {text:"c", link:"/"},
-            ]},
-          {text:"Git", items:[
-              {text:"c", link:"/"},
-            ]},
-          {text:"Debug", items:[
-              {text:"c", link:"/"},
-            ]},
-        ]},
-      { text: '高级', items: [
-          { text: 'SpringBoot', link: '/markdown-examples' },
-          { text: 'MybatisPlus', link: '/markdown-examples' },
-          { text: 'Quartz', link: '/markdown-examples' },
-          { text: 'Redis', link: '/markdown-examples' },
-        ] },
-      { text: '超越', items:[
-          {text: "experience",link: "/"},
-          {text: "软考", items:[
-              {text: "上午内容", link: "/"},
-              {text: "下午内容", link: "/"},
-              ]}
-        ] },
+      { text: '基础', link: '/' },
+      { text: '高级', link: '/' },
+      { text: '超越', link: '/' },
+      { text: '软考', link: '/ISD/index' },
       { text: 'Tools', link: '/markdown-examples' },
-      { text: 'STAR法则', link: '/markdown-examples' }
+      { text: 'STAR', link: '/star/index' }
     ],
 
     sidebar: [
       {
-        text: 'Catalog',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+        text: '基础',
+        children: [
+          { text: 'Java', link: '/' },
+          { text: 'modes', link: '/' },
+          { text: 'Maven', link: '/' },
+          { text: 'Git', link: '/' },
+          { text: 'Debug', link: '/' },
         ]
-      }
+      },
+      {
+        text: '高级',
+        children: [
+          { text: 'SpringBoot', link: '/markdown-examples' },
+          { text: 'MybatisPlus', link: '/markdown-examples' },
+          { text: 'Quartz', link: '/markdown-examples' },
+          { text: 'Redis', link: '/markdown-examples' },
+        ]
+      },
+      {
+        text: '超越',
+        children: [
+          { text: 'experience', link: '/' },
+          { text: '软考', link: '/' },
+        ]
+      },
+      {
+        text: 'Tools',
+        link: '/markdown-examples'
+      },
     ],
 
     socialLinks: [
