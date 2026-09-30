@@ -10,7 +10,7 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Base', items:[
+      { text: '基础', items:[
           {text:"Java", link:"/"},
           {text:"modes", items:[
               {text:"c", link:"/"},
@@ -25,14 +25,18 @@ export default defineConfig({
               {text:"c", link:"/"},
             ]},
         ]},
-      { text: 'High', items: [
+      { text: '高级', items: [
           { text: 'SpringBoot', link: '/markdown-examples' },
           { text: 'MybatisPlus', link: '/markdown-examples' },
           { text: 'Quartz', link: '/markdown-examples' },
           { text: 'Redis', link: '/markdown-examples' },
         ] },
-      { text: 'Ultra', items:[
-          {text: "experience",link: "/"}
+      { text: '超越', items:[
+          {text: "experience",link: "/"},
+          {text: "软考", items:[
+              {text: "上午内容", link: "/"},
+              {text: "下午内容", link: "/"},
+              ]}
         ] },
       { text: 'Tools', link: '/markdown-examples' },
       { text: 'STAR法则', link: '/markdown-examples' }
