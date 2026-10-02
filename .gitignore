@@ -28,3 +28,6 @@ Thumbs.db
 
 # local agent/IDE data
 .codebuddy/
+
+# Excel temp lock files (generated while .xlsx is open)
+~$*
