@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>真题预览</title>
+  <style>
+    :root {
+      --bg: #ffffff; --bg-soft: #f6f6f7; --text: #213547;
+      --border: #e2e2e3; --brand: #3451b2; --danger: #cc3333;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1b1b1f; --bg-soft: #232327; --text: #ebebeb;
+        --border: #3a3a40; --brand: #aab4e8; --danger: #ff6b6b;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 24px; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+    }
+    h1 { font-size: 20px; margin: 0 0 16px; }
+    .tabs { margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tabs button {
+      padding: 4px 12px; cursor: pointer; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text); border-radius: 4px; font-size: 14px;
+    }
+    .tabs button.active { font-weight: 600; color: var(--brand); border-color: var(--brand); }
+    #status { margin: 12px 0; color: var(--text); opacity: .8; }
+    #status.err { color: var(--danger); }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; font-size: 14px; }
+    th, td { border: 1px solid var(--border); padding: 6px 10px; min-width: 60px; vertical-align: top; }
+    th { background: var(--bg-soft); text-align: left; position: sticky; top: 0; }
+  </style>
+  <script>
+    // 根据当前页面路径反推 base（兼容 /Qr1mln-notes/ 部署前缀）
+    var BASE = location.pathname.split('/preview.html')[0] || '';
+  </script>
+  <script src="/Qr1mln-notes/vendor/xlsx.full.min.js"></script>
+</head>
+<body>
+  <h1>真题预览</h1>
+  <div class="tabs" id="tabs"></div>
+  <div id="status">加载中…</div>
+  <div class="table-wrap" id="wrap"></div>
+
+  <script>
+    (function () {
+      var statusEl = document.getElementById('status');
+      var wrapEl = document.getElementById('wrap');
+      var tabsEl = document.getElementById('tabs');
+      var file = new URLSearchParams(location.search).get('file');
+
+      if (!file) {
+        statusEl.className = 'err';
+        statusEl.textContent = '请在地址后追加 ?file= 参数指定 xlsx 路径，例如：' +
+          BASE + '/preview.html?file=' + BASE + '/exam/2016-shang-1.xlsx';
+        return;
+      }
+
+      function showError(msg) {
+        statusEl.className = 'err';
+        statusEl.textContent = '解析失败：' + msg;
+      }
+
+      fetch(file).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.arrayBuffer();
+      }).then(function (buf) {
+        var wb = XLSX.read(new Uint8Array(buf), { type: 'array' });
+        var names = wb.SheetNames;
+        if (!names.length) { statusEl.textContent = '空工作簿'; return; }
+        statusEl.textContent = '';
+
+        function render(idx) {
+          var ws = wb.Sheets[names[idx]];
+          var data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '', raw: false });
+          var table = '<table>';
+          if (data.length) {
+            table += '<thead><tr>';
+            data[0].forEach(function (h, i) { table += '<th>' + escapeHtml(h || ('列' + (i + 1))) + '</th>'; });
+            table += '</tr></thead><tbody>';
+            data.slice(1).forEach(function (row) {
+              table += '<tr>';
+              row.forEach(function (c) { table += '<td>' + escapeHtml(c) + '</td>'; });
+              table += '</tr>';
+            });
+            table += '</tbody>';
+          }
+          table += '</table>';
+          wrapEl.innerHTML = table;
+          Array.prototype.forEach.call(tabsEl.children, function (b, i) {
+            b.className = i === idx ? 'active' : '';
+          });
+        }
+
+        if (names.length > 1) {
+          tabsEl.innerHTML = '';
+          names.forEach(function (n, i) {
+            var b = document.createElement('button');
+            b.textContent = n;
+            b.onclick = function () { render(i); };
+            tabsEl.appendChild(b);
+          });
+        }
+        render(0);
+      }).catch(showError);
+
+      function escapeHtml(v) {
+        return String(v == null ? '' : v)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+    })();
+  </script>
+</body>
+</html>
