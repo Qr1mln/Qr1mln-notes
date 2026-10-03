@@ -10,7 +10,10 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '软考', link: '/examination/index' },
+      { text: '软考', items:[
+          { text: '笔记记录', link: '/examination/111/index' },
+          { text: '模拟考试', link: '/star/index' }
+        ] },
       { text: 'STAR', link: '/star/index' }
     ],
 
