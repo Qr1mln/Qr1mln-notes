@@ -129,3 +129,49 @@
   --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
 }
 
+/**
+ * MathJax SVG 输出所需的全局样式（原由 markdown-it-mathjax3 在每个公式内注入
+ * <style>，但 Vue 编译 SFC 模板禁止模板内的副作用标签，故改为集中放置于此）
+ * -------------------------------------------------------------------------- */
+mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+  min-height: 1px;
+  min-width: 1px;
+}
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+mjx-container[jax="SVG"][display="true"][width="full"] {
+  display: flex;
+}
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+mjx-container[jax="SVG"] path[data-c],
+mjx-container[jax="SVG"] use[data-c] {
+  stroke-width: 3;
+}
+/* 视觉隐藏 MathJax 的无障碍辅助数学（屏幕阅读器仍可用），避免其显示为重复文本 */
+mjx-assistive-mml {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden !important;
+  color: transparent !important;
+}
+
