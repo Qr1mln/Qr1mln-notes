@@ -103,3 +103,22 @@ e2->f1(4,2)=4
 f1 e2 c2 b3 a2 a0
 
 ```
+
+```python
+
+def hmm(c:tuple):
+    s = (0, 2)
+    e = (4, 2)
+    g = abs((s[0] - c[0])) + abs((s[1] - c[1]))
+    h = abs((c[0] - e[0])) + abs((c[1] - e[1]))
+    f = g + h
+    return f
+
+if __name__ == "__main__":
+    tag = "f"
+    list = [(4,2), (4,3), (3,4), (1,3)]
+    print(f"{tag}{1}({list[0][0]},{list[0][1]})={hmm(list[0])}")
+    print(f"{tag}{2}({list[1][0]},{list[1][1]})={hmm(list[1])}")
+    print(f"{tag}{3}({list[2][0]},{list[2][1]})={hmm(list[2])}")
+    print(f"{tag}{4}({list[3][0]},{list[3][1]})={hmm(list[3])}")
+```
