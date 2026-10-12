@@ -42,6 +42,7 @@ export default defineConfig({
           { text: '笔记记录', link: '/examination/index' },
           { text: '模拟考试', link: '/star/index' }
         ] },
+      { text: '数据结构', link: '/structure/index' },
       { text: '算法', link: '/algorithm/index' },
       { text: 'STAR', link: '/star/index' }
     ],
