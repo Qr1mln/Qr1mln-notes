@@ -21,6 +21,9 @@ Thumbs.db
 !.vscode/extensions.json
 *.swp
 
+# Obsidian workspace (editor config, not content)
+.obsidian/
+
 # env
 .env
 .env.*
