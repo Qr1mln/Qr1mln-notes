@@ -9,10 +9,10 @@ hero:
   actions:
     - theme: brand
       text: Qr1mln-notes
-      link: /markdown-examples
+      link: 
     - theme: alt
       text: About Me
-      link: /api-examples
+      link: https://github.com/Qr1mln
 
 features:
 
